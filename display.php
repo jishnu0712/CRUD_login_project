@@ -16,11 +16,10 @@ require "connection.php";
   <div class="container">
     <?php
     echo "<h2>Welcome </h2>";
-    
-    ?>
-    <?php
+
     $sql = "SELECT * FROM `users`";
 
+    
     $data = mysqli_query($conn, $sql);
     $row = mysqli_num_rows($data); //number of rows
 
@@ -30,6 +29,7 @@ require "connection.php";
       <table class='table'>
         <thead>
           <tr>
+            <th scope='col'></th>
             <th scope='col'>Username</th>
             <th scope='col'>Gender</th>
             <th scope='col'>Email</th>
@@ -38,7 +38,6 @@ require "connection.php";
             <th scope='col'>Highest Education</th>
             <th scope='col'>Known Languages</th>
             <th scope='col'>Action</th>
-
           </tr>
         </thead>
         <tbody>
@@ -47,6 +46,7 @@ require "connection.php";
           while ($result = mysqli_fetch_assoc($data)) {
           ?>
             <tr>
+              <td><img src="images/<?php echo $result['picture']; ?>" alt="Avatar" style="border-radius: 50%; width: 60px;"></td>
               <td><?php echo $result['name']; ?></td>
               <td><?php echo $result['gender']; ?></td>
               <td><?php echo $result['email']; ?></td>
@@ -54,8 +54,9 @@ require "connection.php";
               <td><?php echo $result['phone']; ?></td>
               <td><?php echo $result['highest_education']; ?></td>
               <td><?php echo $result['known_languages']; ?></td>
-              <td><a href="form_edit.php?user_id=<?php echo $result['id']?>">Edit</a>
-              <a href="delete_action.php?user_id=<?php echo $result['id'] ?>" >Delete</a></td>
+              <td><a href="form_edit.php?user_id=<?php echo $result['id'] ?>">Edit</a>
+                <a href="delete_action.php?user_id=<?php echo $result['id'] ?>">Delete</a>
+              </td>
             </tr>
           <?php } ?>
         </tbody>

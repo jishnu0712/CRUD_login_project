@@ -1,23 +1,29 @@
 <?php
-  require "connection.php";
-  
-  $email = $_REQUEST["email"];
-  $pwd = md5($_REQUEST['password']);
+require "connection.php";
 
-  $sql = "SELECT * FROM `users` WHERE `email` = '$email' AND password = '$pwd'";
+$email = $_REQUEST["email"];
+$pwd = md5($_REQUEST['password']);
 
-  $query = mysqli_query($conn, $sql); // conn from connection
-  $res = mysqli_num_rows($query);
- 
-  print_r($res);
+$sql = "SELECT * FROM `users` WHERE `email` = '$email' AND password = '$pwd'";
 
-  if ($res == 1) {
-        echo "Login success!";
-        header('Location: display.php');
-  }
-  else {
-        echo "Failed to login.";
-        header('Location: register.php');
-  }
+$query = mysqli_query($conn, $sql); // conn from connection
+$res = mysqli_num_rows($query);
 
+print_r($res);
+
+if ($res == 1) {
+      ?>
+      <script>
+            alert('Login successful');
+            window.location.href = "display.php";
+      </script>
+      <?php
+} else {
+      ?>
+      <script>
+            alert('Login Failed');
+            window.location.href = "index.php";
+      </script>
+      <?php
+}
 ?>

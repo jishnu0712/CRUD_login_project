@@ -1,5 +1,5 @@
 <?php
-    //set connection variables
+    // connection variables
    $servername = "localhost";
    $username = "root";
    $password = "";

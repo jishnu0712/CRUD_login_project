@@ -1,5 +1,8 @@
 <?php
-$str = "jishnu is good guy <br>";
+$html = ['header','body','main','footer'];
 
-echo str_repeat($str,100);
+
+foreach($html as $element) {
+    echo $element . 'is' . 'fantastic </br>';
+}
 ?>

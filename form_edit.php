@@ -1,5 +1,15 @@
 <?php
 require "connection.php";
+$sql = "SELECT * FROM `users` WHERE `id` =" . $_REQUEST['user_id'];
+$data = mysqli_query($conn, $sql);
+$result = mysqli_fetch_assoc($data);
+
+$username =  $result['name'];
+$email =  $result['email'];
+$phone =  $result['phone'];
+$address =  $result['address'];
+$gender =  $result['gender'];
+$highest_education = $result['highest_education'];
 ?>
 
 <!DOCTYPE html>
@@ -14,20 +24,8 @@ require "connection.php";
 </head>
 
 <body>
-    <?php
-    $sql = "SELECT * FROM `users` WHERE `id` =" . $_REQUEST['user_id'];
-    $data = mysqli_query($conn, $sql);
-    $result = mysqli_fetch_assoc($data);
-
-    $username =  $result['name'];
-    $email =  $result['email'];
-    $phone =  $result['phone'];
-    $address =  $result['address'];
-    $gender =  $result['gender'];
-    $highest_education = $result['highest_education'];
-    ?>
-
-    <div class="container">
+    
+<div class="container" style="padding: 0 100px;">
         <h1>Edit</h1>
         <form action="update_action.php?user_id=<?php echo $_REQUEST['user_id'] ?>" method="post">
             <div class="form-group my-4">
