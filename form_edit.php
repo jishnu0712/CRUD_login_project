@@ -1,6 +1,8 @@
 <?php
 require "connection.php";
-$sql = "SELECT * FROM `users` WHERE `id` =" . $_REQUEST['user_id'];
+
+$sql = "SELECT * FROM `employee` WHERE `id` =" . $_REQUEST['user_id'];
+
 $data = mysqli_query($conn, $sql);
 $result = mysqli_fetch_assoc($data);
 

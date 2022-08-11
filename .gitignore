@@ -3,3 +3,5 @@
 
 # ignore ALL files in ANY directory named images
 images/
+deleted/
+documents/

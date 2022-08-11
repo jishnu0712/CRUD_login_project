@@ -17,9 +17,8 @@ require "connection.php";
     <?php
     echo "<h2>Welcome </h2>";
 
-    $sql = "SELECT * FROM `users`";
+    $sql = "SELECT * FROM `employee`";
 
-    
     $data = mysqli_query($conn, $sql);
     $row = mysqli_num_rows($data); //number of rows
 
@@ -53,7 +52,7 @@ require "connection.php";
               <td><?php echo $result['address']; ?></td>
               <td><?php echo $result['phone']; ?></td>
               <td><?php echo $result['highest_education']; ?></td>
-              <td><?php echo $result['known_languages']; ?></td>
+              <td><?php echo $result['languages_known']; ?></td>
               <td><a href="form_edit.php?user_id=<?php echo $result['id'] ?>">Edit</a>
                 <a href="delete_action.php?user_id=<?php echo $result['id'] ?>">Delete</a>
               </td>

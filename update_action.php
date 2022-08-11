@@ -9,12 +9,11 @@
     $highest_education = $_REQUEST['highest_education'];
 
     // echo $phone . $address . $highest_education;
-    $sql = "UPDATE `users` SET `name` = '$username', `email` = '$email', `phone` = '$phone', `address` = '$address', `highest_education` = '$highest_education' WHERE `users`.`id` = '$id'";
+    $sql = "UPDATE `employee` SET `name` = '$username', `email` = '$email', `phone` = '$phone', `address` = '$address', `highest_education` = '$highest_education' WHERE `employee`.`id` = '$id'";
     
     $query = mysqli_query($conn, $sql);
     
     if($query) {
-        echo "<h1>Successfully updated</h1>";
         header("Location: display.php");
     }
     else {

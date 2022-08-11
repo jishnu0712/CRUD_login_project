@@ -1,5 +1,5 @@
 const email = document.getElementById("email");
-const pwd = document.getElementById("pwd");
+const pwd = document.getElementById("pwd"); 
 const form = document.getElementById("form");
 const error = document.getElementById("error");
 
@@ -9,7 +9,7 @@ form.addEventListener('submit',(e)=>{
     if(email.value === null || email.value === ''){
         messages.push("Email is mandatory");
     }
-
+    
     if(pwd.value === "password" ) {
         messages.push("Password can't be password");
     }
