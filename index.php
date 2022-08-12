@@ -47,16 +47,18 @@
     if (strlen($pass > 0)) {
       $query = "SELECT * FROM employee WHERE email='$email' AND password='$pass'";
 
-      $data = mysqli_query($conn, $query);
-      $res = mysqli_num_rows($data);
+      require "run_query.php";
+      $res = get_number_of_rows($conn, $query);
 
       if ($res) {
+        session_start();
+        $_SESSION['username'] = $email;
+
         header("Location: display.php");
       } else {
         echo "Email not exists";
       }
-    } 
-    else {
+    } else {
       echo "Please set the password";
     }
   }

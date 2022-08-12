@@ -1,10 +1,10 @@
 <?php
 require "connection.php";
+require "run_query.php";
 
 $sql = "SELECT * FROM `employee` WHERE `id` =" . $_REQUEST['user_id'];
 
-$data = mysqli_query($conn, $sql);
-$result = mysqli_fetch_assoc($data);
+$result = get_number_of_rows($conn, $sql); //from run query
 
 $username =  $result['name'];
 $email =  $result['email'];
@@ -57,10 +57,12 @@ $highest_education = $result['highest_education'];
                 <label for="gender_radio"><?php echo $gender; ?></label>
             </div>
 
+            
+
             <!-- highest education -->
             <h6>Highest Education</h6>
             <select id="highest_education" name="highest_education" class="form-select" aria-label="Default select example">
-                <option selected><?php echo $highest_education ?></option>
+                <option selected value="<?php echo $highest_education ?>"><?php echo $highest_education ?></option>
                 <option value="M.Tech">M.Tech</option>
                 <option value="M.Sc">M. Sc</option>
                 <option value="B. Tech">B. Tech</option>

@@ -68,7 +68,25 @@
         <input type="checkbox" id="Chinese" name="languages[]" value="Chinese">
         <label for="other">Chinese</label><br>
       </div>
+      <!-- company -->
+      <!-- fetch from company table -->
+      <?php
+      require "connection.php";
 
+      $sql = "SELECT * FROM `company`";
+
+      $data = mysqli_query($conn, $sql);
+      // $result = mysqli_fetch_assoc($data);
+
+      // $cmp_id =  $result['cmp_id'];
+      // $cmp_name =  $result['cmp_name'];
+      ?>
+      <h6>Company</h6>
+      <select id="company" name="company" class="form-select" aria-label="Default select example">
+        <?php while ($result = mysqli_fetch_assoc($data)) { ?>
+          <option value="<?php echo $result['cmp_id'];?>"><?php echo $result['cmp_name']; ?></option>
+        <?php } ?>
+      </select>
       <!-- highest education -->
       <div class="my-4">
         <h6>Highest Education:</h6>
@@ -81,12 +99,6 @@
           <option value="BCA">BCA</option>
         </select>
       </div>
-
-      <!-- documents -->
-      <!-- <div class="form-group my-4">
-        <label for="file">Supporting Documents</label>
-        <input id="file" type="file" class="form-control" name="files[]" multiple />
-      </div> -->
 
       <div class="buttons my-4">
         <button type="submit" class="btn btn-primary">Sign up</button>

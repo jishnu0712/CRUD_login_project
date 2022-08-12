@@ -1,5 +1,10 @@
 <?php
 require "connection.php";
+session_start();
+if (!isset($_SESSION['username'])) {
+  header("Location: index.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,12 +20,12 @@ require "connection.php";
 <body>
   <div class="container">
     <?php
-    echo "<h2>Welcome </h2>";
+    echo "<h2>Welcome ". $_SESSION['username'] . "</h2>";
 
     $sql = "SELECT * FROM `employee`";
 
-    $data = mysqli_query($conn, $sql);
-    $row = mysqli_num_rows($data); //number of rows
+    require "run_query.php";
+    $row = get_number_of_rows($conn, $sql); //number of rows
 
     if ($row > 0) {
       // table header

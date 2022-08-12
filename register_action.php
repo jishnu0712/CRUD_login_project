@@ -20,6 +20,7 @@ $languages_known = implode(", ", $_REQUEST["languages"]);
 $languages_known = test_input($languages_known);
 
 $gender =  test_input($_REQUEST["gender"]);
+$cmp_id = $_REQUEST["company"];
 $highest_education = test_input($_REQUEST["highest_education"]);
 
 //insertion query
@@ -33,7 +34,7 @@ if ($data) {
   $last_id = mysqli_insert_id($conn);
 
   //query to insert
-  $sql = "INSERT INTO `master` (`id`, `cmp_id`, `emp_id`) VALUES (NULL, '2', '$last_id')";
+  $sql = "INSERT INTO `master` (`id`, `cmp_id`, `emp_id`) VALUES (NULL, '$cmp_id', '$last_id')";
   $insert = mysqli_query($conn, $sql);
   
   if ($insert) {

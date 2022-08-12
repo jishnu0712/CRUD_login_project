@@ -8,7 +8,7 @@
     $address =  $_REQUEST['address'];
     $highest_education = $_REQUEST['highest_education'];
 
-    // echo $phone . $address . $highest_education;
+    
     $sql = "UPDATE `employee` SET `name` = '$username', `email` = '$email', `phone` = '$phone', `address` = '$address', `highest_education` = '$highest_education' WHERE `employee`.`id` = '$id'";
     
     $query = mysqli_query($conn, $sql);
