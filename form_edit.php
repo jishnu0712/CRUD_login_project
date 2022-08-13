@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    echo "<h1>You need to login to continue</h1>";
+    exit();
+}
+
 require "connection.php";
 require "run_query.php";
 
@@ -21,13 +27,14 @@ $highest_education = $result['highest_education'];
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
     <title>Edit</title>
 </head>
 
 <body>
-    
-<div class="container" style="padding: 0 100px;">
+    <?php require "navbar.php" ?>
+    <div class="container" style="padding: 0 100px;">
         <h1>Edit</h1>
         <form action="update_action.php?user_id=<?php echo $_REQUEST['user_id'] ?>" method="post">
             <div class="form-group my-4">
@@ -57,7 +64,7 @@ $highest_education = $result['highest_education'];
                 <label for="gender_radio"><?php echo $gender; ?></label>
             </div>
 
-            
+
 
             <!-- highest education -->
             <h6>Highest Education</h6>

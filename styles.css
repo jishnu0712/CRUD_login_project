@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+}
+/* height */
+.h-screen {
+  height: 100vh;
+}
+.h-full {  
+  height: 100%;
+}
+.border-green {
+  border: 2px solid green;
+}
+.border {
+  border: 2px solid rgb(162, 153, 153);
+}
+/* navbar */
+.nav-list{
+    display: flex ;
+    justify-content: flex-end;
+}
+.nav-padding{
+    padding: 10px 21px;
+}
+/* register form */
+.form-padding{
+    padding: 55px 65px;
+}

@@ -12,7 +12,7 @@ $tmpname = $_FILES['picture']['tmp_name']; // denotes the path to move to destin
 $folder = "images/" . $filename;
 move_uploaded_file($tmpname, $folder);
 
-$phone = test_input($_REQUEST["phone"]); //testinput from validation.php
+$phone = test_input($_REQUEST["phone"]); //test_input from validation.php
 $password = md5(test_input($_REQUEST["password"]));
 $address = test_input($_REQUEST["address"]);
 //make a string from checkboxes
@@ -22,9 +22,9 @@ $languages_known = test_input($languages_known);
 $gender =  test_input($_REQUEST["gender"]);
 $cmp_id = $_REQUEST["company"];
 $highest_education = test_input($_REQUEST["highest_education"]);
-
+$role_id = $_REQUEST["role_id"];
 //insertion query
-$sql = "INSERT INTO `employee` (`name`, `email`, `phone`, `password`, `picture`, `address`, `gender`, `languages_known`, `highest_education`) VALUES ('$name','$email','$phone','$password','$filename','$address','$gender','$languages_known','$highest_education')";
+$sql = "INSERT INTO `employee` (`name`, `email`, `phone`, `password`, `picture`, `address`, `gender`, `languages_known`, `highest_education`, `role_id`) VALUES ('$name','$email','$phone','$password','$filename','$address','$gender','$languages_known','$highest_education', '$role_id')";
 
 $data = mysqli_query($conn, $sql);  // $conn from connection.php
 
@@ -36,15 +36,15 @@ if ($data) {
   //query to insert
   $sql = "INSERT INTO `master` (`id`, `cmp_id`, `emp_id`) VALUES (NULL, '$cmp_id', '$last_id')";
   $insert = mysqli_query($conn, $sql);
-  
+
   if ($insert) {
-  ?>
+?>
 
     <script>
       alert('Registration successful');
       window.location.href = "index.php";
     </script>
-  
+
   <?php
   }
 } else {
