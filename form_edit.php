@@ -6,11 +6,12 @@ if (!isset($_SESSION['username'])) {
 }
 
 require "connection.php";
-require "run_query.php";
+// require "run_query.php";
 
 $sql = "SELECT * FROM `employee` WHERE `id` =" . $_REQUEST['user_id'];
 
-$result = get_number_of_rows($conn, $sql); //from run query
+$data = mysqli_query($conn, $sql);
+$result = mysqli_fetch_assoc($data);
 
 $username =  $result['name'];
 $email =  $result['email'];
@@ -34,8 +35,8 @@ $highest_education = $result['highest_education'];
 
 <body>
     <?php require "navbar.php" ?>
-    <div class="container" style="padding: 0 100px;">
-        <h1>Edit</h1>
+    <div class="register-box container shadow px-5 py-4 my-4" >
+        <h1>Update Details</h1>
         <form action="update_action.php?user_id=<?php echo $_REQUEST['user_id'] ?>" method="post">
             <div class="form-group my-4">
                 <label for="username">Username</label>
@@ -54,7 +55,7 @@ $highest_education = $result['highest_education'];
 
             <div class="form-group my-4">
                 <label for="address">Address</label>
-                <input type="text" id="address" name="address" value="<?php echo $address ?>" class="form-control" placeholder="Enter address" />
+                <input type="text" id="address" name="address" value="<?php echo $address ?>" autocomplete="off" class="form-control" placeholder="Enter address" />
             </div>
 
             <!-- gender -->
@@ -63,8 +64,6 @@ $highest_education = $result['highest_education'];
                 <input type="radio" checked name="gender" id="gender_radio" />
                 <label for="gender_radio"><?php echo $gender; ?></label>
             </div>
-
-
 
             <!-- highest education -->
             <h6>Highest Education</h6>
@@ -78,7 +77,7 @@ $highest_education = $result['highest_education'];
                 <option value="BCA">BCA</option>
             </select>
 
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary my-4">Update</button>
     </div>
 </body>
 

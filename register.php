@@ -8,23 +8,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>New Registration</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
   <div class="px-4 py-3">
     <div class="register-box container  shadow px-5 py-4">
       <h2>Registration</h2>
-      <div id="error"></div>
+
       <form id="form" action="register_action.php" method="post" enctype="multipart/form-data">
         <div class="form-group my-4">
           <label for="username">Username</label>
-          <input type="text" id="username" required name="username" class="form-control" autocomplete="off" placeholder="Enter Username" />
+          <input type="text" id="username" name="username" class="form-control" autocomplete="off" placeholder="Enter Username" />
         </div>
 
         <div class="form-group my-4">
           <label for="email">Email</label>
-          <input type="email" id="email" required name="email" class="form-control" autocomplete="off" placeholder="Enter Email" />
+          <input type="email" id="email" name="email" class="form-control" autocomplete="off" placeholder="Enter Email" />
         </div>
 
         <div class="form-group my-4">
@@ -108,6 +108,8 @@
             <option value="1">Super Admin</option>
           </select>
         </div>
+
+        <p id="error" class="text-danger font-weight-bold"></p>
         <!-- submit buttons -->
         <div class="buttons my-4">
           <button type="submit" class="btn btn-primary">Sign up</button>
@@ -120,6 +122,7 @@
     </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="register_page_validation.js"></script>
 </body>
 
 </html>

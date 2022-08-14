@@ -1,5 +1,13 @@
+<?php
+$flag = false;
+if (isset($_SESSION['username'])) {
+  // enable flag
+  $flag = true;
+}
+?>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-padding">
-  <a class="navbar-brand" href="http://localhost/login_project/">Qandel</a>
+  <a class="navbar-brand" href="http://localhost/login_project/">Employee+</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -12,10 +20,7 @@
         <a class="nav-link" href="#">Features</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link"  href="logout_action.php">Logout</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a class="nav-link <?php echo $flag ?  "" : "disabled" ?>" href="logout_action.php">Logout</a>
       </li>
     </ul>
   </div>

@@ -24,7 +24,8 @@ $cmp_id = $_REQUEST["company"];
 $highest_education = test_input($_REQUEST["highest_education"]);
 $role_id = $_REQUEST["role_id"];
 //insertion query
-$sql = "INSERT INTO `employee` (`name`, `email`, `phone`, `password`, `picture`, `address`, `gender`, `languages_known`, `highest_education`, `role_id`) VALUES ('$name','$email','$phone','$password','$filename','$address','$gender','$languages_known','$highest_education', '$role_id')";
+//add company name
+$sql = "INSERT INTO `employee` (`name`, `email`, `phone`, `password`, `picture`, `address`, `gender`, `languages_known`, `highest_education`, `role_id`, `cmp_id`) VALUES ('$name','$email','$phone','$password','$filename','$address','$gender','$languages_known','$highest_education', '$role_id','$cmp_id')";
 
 $data = mysqli_query($conn, $sql);  // $conn from connection.php
 

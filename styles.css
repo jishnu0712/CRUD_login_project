@@ -22,7 +22,30 @@
 .nav-padding{
     padding: 10px 21px;
 }
+/* login */
+.login-box{
+    width: 400px;
+    margin: auto;
+}
+.login-container{
+    height: 90%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+.login-buttons{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 /* register form */
 .form-padding{
     padding: 55px 65px;
+}
+/* display page */
+.list-container{
+    
 }

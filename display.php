@@ -14,7 +14,7 @@ if (!isset($_SESSION['username'])) {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>New Registration</title>
+  <title>Details</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -22,14 +22,39 @@ if (!isset($_SESSION['username'])) {
 <body>
   <?php
   require "navbar.php";
-  echo '<div class="container">';
-  echo "<h2>Welcome " . $_SESSION['username'] . "</h2>";
+  echo '<div class="container py-4 ">';
+  $email = $_SESSION['username'];
 
-  $sql = "SELECT * FROM `employee`";
+  echo "<h2>Welcome " . $email . "</h2>";
+
+  // 1.get role_id
+  $sql_get_role = "SELECT * FROM `employee` WHERE `email` LIKE '$email'";
+  $data = mysqli_query($conn, $sql_get_role);
+  $result = mysqli_fetch_assoc($data);
+
+  $role_id = $result['role_id'];
+  $cmp_id = $result['cmp_id'];
+  $sql = "";
+  //if role_id == 1 => superuser table: query = SELECT *
+  if ($role_id == 1) {
+    $sql = "SELECT * FROM `employee`";
+  }
+
+
+  //if role_id == 2 => get user company name, table: q = SELECT * WHERE company = 
+  if ($role_id == 2) {
+    $sql = "SELECT * FROM `employee` WHERE `cmp_id` = '$cmp_id'";
+  }
+
+  //if role_id == 3 only edit own details
+  if ($role_id == 3) {
+    $sql = "SELECT * FROM `employee` WHERE `email` LIKE '$email' ";
+  }
+
 
   require "run_query.php";
   $data = mysqli_query($conn, $sql);
-  $row = get_number_of_rows($conn, $sql); //number of rows
+  $row = mysqli_num_rows($data); //number of rows
 
   if ($row > 0) {
     // table header
