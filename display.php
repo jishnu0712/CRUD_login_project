@@ -19,6 +19,7 @@ if (!isset($_SESSION['username'])) {
   <link rel="stylesheet" href="styles.css">
 </head>
 
+
 <body>
   <?php
   require "navbar.php";
@@ -102,6 +103,7 @@ if (!isset($_SESSION['username'])) {
   }
 
   ?>
+  
 </body>
 
 </html>

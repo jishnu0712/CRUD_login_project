@@ -14,10 +14,10 @@ if (isset($_SESSION['username'])) {
   <div class="collapse navbar-collapse nav-list" id="navbarNav">
     <ul class="navbar-nav ">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="http://localhost/login_project/">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
+        <a class="nav-link" href="register.php">Register</a>
       </li>
       <li class="nav-item">
         <a class="nav-link <?php echo $flag ?  "" : "disabled" ?>" href="logout_action.php">Logout</a>
