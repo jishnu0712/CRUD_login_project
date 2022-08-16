@@ -6,12 +6,11 @@ if (!isset($_SESSION['username'])) {
 }
 
 require "connection.php";
-// require "run_query.php";
 
 $sql = "SELECT * FROM `employee` WHERE `id` =" . $_REQUEST['user_id'];
 
-$data = mysqli_query($conn, $sql);
-$result = mysqli_fetch_assoc($data);
+require "run_query.php";
+$result = get_assoc_arr($conn, $sql);
 
 $username =  $result['name'];
 $email =  $result['email'];

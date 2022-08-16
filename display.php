@@ -38,24 +38,23 @@ if (!isset($_SESSION['username'])) {
   $sql = "";
   //if role_id == 1 => superuser table: query = SELECT *
   if ($role_id == 1) {
-    $sql = "SELECT * FROM `employee`";
+    $sql = "SELECT * FROM employee LEFT JOIN company ON employee.cmp_id = company.cmp_id";
   }
 
 
-  //if role_id == 2 => get user company name, table: q = SELECT * WHERE company = 
+  //if role_id == 2 => get users with same company name, table: q = SELECT * WHERE company = 
   if ($role_id == 2) {
-    $sql = "SELECT * FROM `employee` WHERE `cmp_id` = '$cmp_id'";
+    $sql = "SELECT * FROM employee LEFT JOIN company ON employee.cmp_id = company.cmp_id WHERE employee.cmp_id = '$cmp_id'";
   }
 
-  //if role_id == 3 only edit own details
+  //if role_id == 3 can only edit own details
   if ($role_id == 3) {
-    $sql = "SELECT * FROM `employee` WHERE `email` LIKE '$email' ";
+    $sql = "SELECT * FROM employee LEFT JOIN company ON employee.cmp_id = company.cmp_id WHERE `email` LIKE '$email' ";
   }
 
 
   require "run_query.php";
-  $data = mysqli_query($conn, $sql);
-  $row = mysqli_num_rows($data); //number of rows
+  $row = get_number_of_rows($conn, $sql); //number of rows
 
   if ($row > 0) {
     // table header
@@ -71,6 +70,7 @@ if (!isset($_SESSION['username'])) {
           <th scope='col'>Phone</th>
           <th scope='col'>Highest Education</th>
           <th scope='col'>Known Languages</th>
+          <th scope='col'>Organization</th>
           <th scope='col'>Action</th>
         </tr>
       </thead>
@@ -88,6 +88,8 @@ if (!isset($_SESSION['username'])) {
             <td><?php echo $result['phone']; ?></td>
             <td><?php echo $result['highest_education']; ?></td>
             <td><?php echo $result['languages_known']; ?></td>
+            <td><?php echo $result['cmp_name']; ?></td>
+           
             <td><a href="form_edit.php?user_id=<?php echo $result['id'] ?>">Edit</a>
               <a href="delete_action.php?user_id=<?php echo $result['id'] ?>">Delete</a>
             </td>
