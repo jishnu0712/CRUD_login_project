@@ -41,7 +41,6 @@ if (!isset($_SESSION['username'])) {
     $sql = "SELECT * FROM employee LEFT JOIN company ON employee.cmp_id = company.cmp_id";
   }
 
-
   //if role_id == 2 => get users with same company name, table: q = SELECT * WHERE company = 
   if ($role_id == 2) {
     $sql = "SELECT * FROM employee LEFT JOIN company ON employee.cmp_id = company.cmp_id WHERE employee.cmp_id = '$cmp_id'";
@@ -49,12 +48,12 @@ if (!isset($_SESSION['username'])) {
 
   //if role_id == 3 can only edit own details
   if ($role_id == 3) {
-    $sql = "SELECT * FROM employee LEFT JOIN company ON employee.cmp_id = company.cmp_id WHERE `email` LIKE '$email' ";
+    $sql = "SELECT * FROM employee LEFT JOIN company ON employee.cmp_id = company.cmp_id WHERE email LIKE '$email'";
   }
 
-
-  require "run_query.php";
-  $row = get_number_of_rows($conn, $sql); //number of rows
+  // require "run_query.php";
+  $data = mysqli_query($conn, $sql);
+  $row = mysqli_num_rows($data); //number of rows
 
   if ($row > 0) {
     // table header
