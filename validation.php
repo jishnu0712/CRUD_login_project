@@ -11,8 +11,33 @@ function check_email($email)
 {
     $email = test_input($email);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return  true;
+        //invalid
+        return false;
     }
-    return false;
+    return true;
 }
-?>
+
+function check_phone($phone)
+{
+    if (!is_numeric($phone)) {
+        return false;
+    }
+    if (strlen($phone) != 10) {
+        return false;
+    }
+    return true;
+}
+
+function check_password($password)
+{
+    $uppercase = preg_match('@[A-Z]@', $password);
+    $lowercase = preg_match('@[a-z]@', $password);
+    $number    = preg_match('@[0-9]@', $password);
+    $specialChars = preg_match('@[^\w]@', $password);
+
+    if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 4) {
+        //pwd error
+        return false;
+    }
+    return true;
+}

@@ -23,6 +23,35 @@ $gender =  test_input($_REQUEST["gender"]);
 $cmp_id = $_REQUEST["company"];
 $highest_education = test_input($_REQUEST["highest_education"]);
 $role_id = $_REQUEST["role_id"];
+
+session_start();
+$flag = 0;
+// validation 
+if (strlen($name) < 2) {
+  $_SESSION['username_error'] = true;
+  $flag = 1;
+}
+
+if (!check_email($email)) { //invalid
+  $_SESSION['email_error'] = true;
+  $flag = 1;
+}
+
+if( !check_phone($phone)){
+  $_SESSION['phone_error'] = true;
+  $flag = 1;
+}
+
+if( !check_password($_REQUEST["password"])){
+  $_SESSION['password_error'] = true;
+  $flag = 1;
+}
+//if failed start session
+if ($flag == 1) {
+  $_SESSION['error'] = true;
+  header("location:register.php");
+}
+
 //insertion query
 //add company name
 $sql = "INSERT INTO `employee` (`name`, `email`, `phone`, `password`, `picture`, `address`, `gender`, `languages_known`, `highest_education`, `role_id`, `cmp_id`) VALUES ('$name','$email','$phone','$password','$filename','$address','$gender','$languages_known','$highest_education', '$role_id','$cmp_id')";

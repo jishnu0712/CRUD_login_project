@@ -58,9 +58,11 @@ if (isset($_POST["login"])) {
           <div class="d-flex flex-column">
             <form class="form-group my-2">
               <input id="email" autocomplete="off" class="form-control py-2 px-4" name="email" placeholder="Enter email">
+              
               <?php if ($email_invalid && $email_invalid == true) { ?>
                 <small class="errorText text-danger"> Invalid Email! </small>
-              <?php } ?>
+                <?php } ?>
+                
             </form>
             <div class="form-group my-2">
               <input id="pwd" type="password" class="form-control py-2 px-4" name="password" placeholder="Enter Password">
