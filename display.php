@@ -91,6 +91,7 @@ if (!isset($_SESSION['username'])) {
             <td><?php echo $result['cmp_name']; ?></td>
            
             <td><a href="form_edit.php?user_id=<?php echo $result['id'] ?>">Edit</a>
+            
               <a href="delete_action.php?user_id=<?php echo $result['id'] ?>">Delete</a>
             </td>
           </tr>

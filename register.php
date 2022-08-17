@@ -6,6 +6,7 @@
   if(isset($_SESSION['username'])) {
     unset($_SESSION['username']);
   }
+  // if(isset())
   ?>
 
  <!DOCTYPE html>
@@ -26,7 +27,7 @@
 
        <form id="form" action="register_action.php" method="post" enctype="multipart/form-data">
          <div class="form-group my-4">
-           <label for="username">Username</label>
+           <label for="username">Username <span class="text-danger">*</span></label>
            <input type="text" id="username" name="username" class="form-control" autocomplete="off" placeholder="Enter Username" />
          </div>
 
@@ -37,8 +38,9 @@
           } ?>
 
          <div class="form-group my-4">
-           <label for="email">Email</label>
-           <input type="email" id="email" name="email" class="form-control" autocomplete="off" placeholder="Enter Email" />
+           <label for="email">Email <span class="text-danger">*</span></label>
+           <input type="email" id="email" name="email" class="form-control" 
+           autocomplete="off" placeholder="Enter Email" />
          </div>
 
          <?php if (isset($_SESSION['email_error'])) {
@@ -48,18 +50,19 @@
           } ?>
 
          <div class="form-group my-4">
-           <label for="phone">Phone</label>
-           <input type="number" id="phone" name="phone" class="form-control" autocomplete="off" placeholder="Enter Phone" />
+           <label for="phone">Phone <span class="text-danger">*</span></label>
+           <input type="number" id="phone" name="phone" class="form-control" autocomplete="off"
+            placeholder="Enter Phone" />
          </div>
 
          <?php if (isset($_SESSION['phone_error'])) {
             if ($_SESSION["phone_error"] == true) { ?>
-             <small class="errorText text-danger"> Invalid phone number! </small>
+             <small class="errorText text-danger"> Phone number must be 10digit long! </small>
          <?php }
           } ?>
 
          <div class="form-group my-4">
-           <label for="password">Password</label>
+           <label for="password">Password <span class="text-danger">*</span></label>
            <input id="password" type="password" class="form-control" name="password"
             placeholder="Password" />
          </div>

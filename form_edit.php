@@ -57,13 +57,6 @@ $highest_education = $result['highest_education'];
                 <input type="text" id="address" name="address" value="<?php echo $address ?>" autocomplete="off" class="form-control" placeholder="Enter address" />
             </div>
 
-            <!-- gender -->
-            <div>
-                <h6>Gender:</h6>
-                <input type="radio" checked name="gender" id="gender_radio" />
-                <label for="gender_radio"><?php echo $gender; ?></label>
-            </div>
-
             <!-- highest education -->
             <h6>Highest Education</h6>
             <select id="highest_education" name="highest_education" class="form-select" aria-label="Default select example">
