@@ -50,6 +50,7 @@ if( !check_password($_REQUEST["password"])){
 if ($flag == 1) {
   $_SESSION['error'] = true;
   header("location:register.php");
+  exit();
 }
 
 //insertion query

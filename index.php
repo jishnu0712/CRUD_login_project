@@ -2,6 +2,8 @@
 require "connection.php";
 require "validation.php";
 
+session_start();
+
 $login_err = false;
 $pass_invalid = false;
 $email_invalid = false;
@@ -9,9 +11,11 @@ $email_invalid = false;
 if (isset($_POST["login"])) {
 
   $email = $_POST["email"];
-  $email_invalid = check_email($email);
-  
-  if (strlen($_POST["password"] > 2)) {
+  $email_invalid = !check_email($email);
+
+  $pass_invalid = strlen($_POST["password"]) > 2 ? false : true;
+
+  if (!$pass_invalid) {
     $pass = md5($_POST["password"]);
     //valid password
     $query = "SELECT * FROM employee WHERE email='$email' AND password='$pass'";
@@ -20,16 +24,12 @@ if (isset($_POST["login"])) {
     $res = get_number_of_rows($conn, $query);
 
     if ($res == 1) {
-      session_start();
       $_SESSION['username'] = $email;
 
       header("Location: display.php");
     } else {
       $login_err = true;
     }
-  } else {
-    
-    $pass_invalid = true;
   }
 }
 ?>
@@ -52,18 +52,20 @@ if (isset($_POST["login"])) {
 
     <!-- login-box -->
     <div class="login-container flex-fill">
-      <div class="login-box border d-flex flex-column px-4 py-3 shadow rounded ">
+      <div class="login-box border d-flex flex-column px-4 py-3 shadow rounded">
         <h2 class="my-2">Login</h2>
         <form id="form" action="" method="post">
           <div class="d-flex flex-column">
             <form class="form-group my-2">
+
               <input id="email" autocomplete="off" class="form-control py-2 px-4" name="email" placeholder="Enter email">
-              
+
               <?php if ($email_invalid && $email_invalid == true) { ?>
                 <small class="errorText text-danger"> Invalid Email! </small>
-                <?php } ?>
-                
+              <?php } ?>
+
             </form>
+
             <div class="form-group my-2">
               <input id="pwd" type="password" class="form-control py-2 px-4" name="password" placeholder="Enter Password">
             </div>
@@ -73,13 +75,13 @@ if (isset($_POST["login"])) {
             <?php } ?>
 
             <?php if ($pass_invalid && $pass_invalid == true) { ?>
-              <small class="errorText text-danger">Password should be greater than 3 digits</small>
+              <small class="errorText text-danger">Password Invalid.</small>
             <?php } ?>
 
             <div class="login-buttons my-2">
               <input type="submit" class="btn  btn-success mx-2 " value="Login" name="login">
               <a href="./register.php">
-                <div class="btn  btn-warning mx-2 ">Register</div>
+                <div class="btn btn-warning mx-2 ">Register</div>
               </a>
             </div>
           </div>

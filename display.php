@@ -38,17 +38,17 @@ if (!isset($_SESSION['username'])) {
   $sql = "";
   //if role_id == 1 => superuser table: query = SELECT *
   if ($role_id == 1) {
-    $sql = "SELECT * FROM employee LEFT JOIN company ON employee.cmp_id = company.cmp_id";
+    $sql = "SELECT id,picture, name, gender, email, employee.address, employee.phone, highest_education, languages_known, company.cmp_name FROM employee LEFT JOIN company ON employee.cmp_id = company.cmp_id;";
   }
 
   //if role_id == 2 => get users with same company name, table: q = SELECT * WHERE company = 
   if ($role_id == 2) {
-    $sql = "SELECT * FROM employee LEFT JOIN company ON employee.cmp_id = company.cmp_id WHERE employee.cmp_id = '$cmp_id'";
+    $sql = "SELECT id,picture, name, gender, email, employee.address, employee.phone, highest_education, languages_known, company.cmp_name FROM employee LEFT JOIN company ON employee.cmp_id = company.cmp_id WHERE employee.cmp_id = '$cmp_id'";
   }
 
   //if role_id == 3 can only edit own details
   if ($role_id == 3) {
-    $sql = "SELECT * FROM employee LEFT JOIN company ON employee.cmp_id = company.cmp_id WHERE email LIKE '$email'";
+    $sql = "SELECT id,picture, name, gender, email, employee.address, employee.phone, highest_education, languages_known, company.cmp_name FROM employee LEFT JOIN company ON employee.cmp_id = company.cmp_id WHERE email LIKE '$email'";
   }
 
   // require "run_query.php";
@@ -79,7 +79,8 @@ if (!isset($_SESSION['username'])) {
         while ($result = mysqli_fetch_assoc($data)) {
         ?>
           <tr>
-            <td><img src="images/<?php echo $result['picture']; ?>" alt="Avatar" style="border-radius: 50%; width: 60px; height:60px;"></td>
+            <td><img src="images/<?php echo $result['picture']; ?>" alt="Avatar" 
+            style="border-radius: 50%; width: 60px; height:60px;"></td>
             <td><?php echo $result['name']; ?></td>
             <td><?php echo $result['gender']; ?></td>
             <td><?php echo $result['email']; ?></td>

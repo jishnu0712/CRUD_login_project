@@ -2,6 +2,10 @@
   require "navbar.php";
 
   session_start();
+  //logout user going into registration page
+  if(isset($_SESSION['username'])) {
+    unset($_SESSION['username']);
+  }
   ?>
 
  <!DOCTYPE html>
@@ -62,7 +66,7 @@
 
          <?php if (isset($_SESSION['password_error'])) {
             if ($_SESSION["password_error"] == true) { ?>
-             <small class="errorText text-danger"> Password should be at least 8 characters
+             <small class="errorText text-danger"> Password should be at least 4 characters
                in length and should include at least one upper case letter, one number,
                 and one special character. </small>
          <?php }
