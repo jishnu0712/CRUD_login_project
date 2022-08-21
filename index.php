@@ -3,6 +3,11 @@ require "connection.php";
 require "validation.php";
 
 session_start();
+if (isset($_SESSION['username'])) {
+  session_unset();
+  session_destroy();
+}
+
 
 $login_err = false;
 $pass_invalid = false;

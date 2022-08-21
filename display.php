@@ -23,6 +23,7 @@ if (!isset($_SESSION['username'])) {
 <body>
   <?php
   require "navbar.php";
+
   echo '<div class="container py-4 ">';
   $email = $_SESSION['username'];
 
@@ -58,6 +59,7 @@ if (!isset($_SESSION['username'])) {
   if ($row > 0) {
     // table header
   ?>
+    <div id="modal"></div>
     <table class='table'>
       <thead>
         <tr>
@@ -79,8 +81,7 @@ if (!isset($_SESSION['username'])) {
         while ($result = mysqli_fetch_assoc($data)) {
         ?>
           <tr>
-            <td><img src="images/<?php echo $result['picture']; ?>" alt="Avatar" 
-            style="border-radius: 50%; width: 60px; height:60px;"></td>
+            <td><img src="images/<?php echo $result['picture']; ?>" alt="Avatar" style="border-radius: 50%; width: 60px; height:60px;"></td>
             <td><?php echo $result['name']; ?></td>
             <td><?php echo $result['gender']; ?></td>
             <td><?php echo $result['email']; ?></td>
@@ -89,10 +90,37 @@ if (!isset($_SESSION['username'])) {
             <td><?php echo $result['highest_education']; ?></td>
             <td><?php echo $result['languages_known']; ?></td>
             <td><?php echo $result['cmp_name']; ?></td>
-           
-            <td><a href="form_edit.php?user_id=<?php echo $result['id'] ?>">Edit</a>
-            
-              <a href="delete_action.php?user_id=<?php echo $result['id'] ?>">Delete</a>
+
+            <td>
+              <button class="btn btn-link">
+                <a href="form_edit.php?user_id=<?php echo $result['id'] ?>">Edit</a>
+              </button>
+
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                Delete
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Delete ?</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Are you sure you want to delete?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-danger"> <a href="delete_action.php?user_id=<?php echo $result['id'] ?>">Delete</a>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </td>
           </tr>
         <?php } ?>
@@ -106,7 +134,10 @@ if (!isset($_SESSION['username'])) {
   }
 
   ?>
-  
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>

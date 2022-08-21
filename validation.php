@@ -41,3 +41,10 @@ function check_password($password)
     }
     return true;
 }
+
+function check_gender($list) {
+    if($list == -1) {
+        return false;
+    }
+    return true;
+}

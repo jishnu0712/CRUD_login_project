@@ -3,10 +3,9 @@
 
   session_start();
   //logout user going into registration page
-  if(isset($_SESSION['username'])) {
+  if (isset($_SESSION['username'])) {
     unset($_SESSION['username']);
   }
-  // if(isset())
   ?>
 
  <!DOCTYPE html>
@@ -39,8 +38,7 @@
 
          <div class="form-group my-4">
            <label for="email">Email <span class="text-danger">*</span></label>
-           <input type="email" id="email" name="email" class="form-control" 
-           autocomplete="off" placeholder="Enter Email" />
+           <input type="email" id="email" name="email" class="form-control" autocomplete="off" placeholder="Enter Email" />
          </div>
 
          <?php if (isset($_SESSION['email_error'])) {
@@ -51,8 +49,7 @@
 
          <div class="form-group my-4">
            <label for="phone">Phone <span class="text-danger">*</span></label>
-           <input type="number" id="phone" name="phone" class="form-control" autocomplete="off"
-            placeholder="Enter Phone" />
+           <input type="number" id="phone" name="phone" class="form-control" autocomplete="off" placeholder="Enter Phone" />
          </div>
 
          <?php if (isset($_SESSION['phone_error'])) {
@@ -63,15 +60,23 @@
 
          <div class="form-group my-4">
            <label for="password">Password <span class="text-danger">*</span></label>
-           <input id="password" type="password" class="form-control" name="password"
-            placeholder="Password" />
+           <input id="password" 
+           type="password" 
+           class="form-control" 
+           name="password"
+          placeholder="at least 4 characters, should include one uppercase, lowercase, number, and special character."
+          hint
+          />
          </div>
+         <!-- <small class="text-mute"> Password should be at least 4 characters
+           in length and should include at least one upper case letter, one number,
+           and one special character. </small> -->
 
          <?php if (isset($_SESSION['password_error'])) {
             if ($_SESSION["password_error"] == true) { ?>
              <small class="errorText text-danger"> Password should be at least 4 characters
                in length and should include at least one upper case letter, one number,
-                and one special character. </small>
+               and one special character. </small>
          <?php }
           } ?>
 
@@ -87,7 +92,7 @@
 
          <!-- gender -->
          <div class="my-4">
-           <h6>Gender:</h6>
+           <h6>Gender:  <span class="text-danger">*</span></h6>
            <input type="radio" name="gender" id="male_checkbox" value="male" />
            <label for="male">Male</label>
 
@@ -97,6 +102,13 @@
            <input type="radio" name="gender" id="other_checkbox" value="other" />
            <label for="other">other</label>
          </div>
+
+         <?php if (isset($_SESSION['gender_error'])) {
+            if ($_SESSION["gender_error"] == true) { ?>
+             <small class="errorText text-danger"> Please select gender </small>
+         <?php }
+          } ?>
+
          <!-- Languages -->
          <h6>Languages Known</h6>
 
@@ -118,7 +130,7 @@
           $data = mysqli_query($conn, $sql);
 
           ?>
-         <h6>Company</h6>
+         <h6>Company <span class="text-danger">*</span></h6>
          <select id="company" name="company" class="form-select" aria-label="Default select example">
            <?php while ($result = mysqli_fetch_assoc($data)) { ?>
              <option value="<?php echo $result['cmp_id']; ?>"><?php echo $result['cmp_name']; ?></option>
@@ -126,7 +138,7 @@
          </select>
          <!-- highest education -->
          <div class="my-4">
-           <h6>Highest Education:</h6>
+           <h6>Highest Education: <span class="text-danger">*</span></h6>
            <select id="highest_education" name="highest_education" class="form-select" aria-label="Default select example">
              <option selected>M.Tech</option>
              <option value="M.Sc">M. Sc</option>
@@ -139,7 +151,7 @@
 
          <!-- role_id -->
          <div class="my-4">
-           <h6>Select Role:</h6>
+           <h6>Select Role: <span class="text-danger">*</span></h6>
            <select id="role_id" name="role_id" class="form-select" aria-label="Default select example">
              <option selected value="3">Employee</option>
              <option value="2">Company</option>
@@ -168,6 +180,7 @@
         unset($_SESSION["email_error"]);
         unset($_SESSION["phone_error"]);
         unset($_SESSION["password_error"]);
+        unset($_SESSION["gender_error"]);
       }
 
       ?>

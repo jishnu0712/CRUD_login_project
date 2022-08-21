@@ -46,6 +46,10 @@ if( !check_password($_REQUEST["password"])){
   $_SESSION['password_error'] = true;
   $flag = 1;
 }
+
+if(!$gender) {
+  $_SESSION['gender_error'] = true;
+}
 //if failed start session
 if ($flag == 1) {
   $_SESSION['error'] = true;
@@ -70,7 +74,6 @@ if ($data) {
 
   if ($insert) {
 ?>
-
     <script>
       alert('Registration successful');
       window.location.href = "index.php";
