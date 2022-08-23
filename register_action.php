@@ -1,6 +1,42 @@
 <?php
+session_start();
 require 'connection.php';
 require 'validation.php';
+
+$flag = 0;
+// validation 
+if (strlen($_REQUEST['username']) < 2) {
+  $_SESSION['username_error'] = true;
+  $flag = 1;
+}
+
+if (!check_email($_REQUEST["email"])) { //invalid
+
+  $_SESSION['email_error'] = true;
+  $flag = 1;
+}
+
+if (!check_phone($_REQUEST["phone"])) {
+
+  $_SESSION['phone_error'] = true;
+  $flag = 1;
+}
+
+if (!check_password($_REQUEST["password"])) {
+  $_SESSION['password_error'] = true;
+  $flag = 1;
+}
+
+if (empty($_REQUEST["gender"])) {
+  $_SESSION['gender_error'] = true;
+  $flag = 1;
+}
+//if failed start session
+if ($flag == 1) {
+  $_SESSION['error'] = true;
+  header("location:register.php");
+  exit();
+}
 
 //get data from fields
 $name = test_input($_REQUEST['username']); //test input from validation
@@ -16,46 +52,17 @@ $phone = test_input($_REQUEST["phone"]); //test_input from validation.php
 $password = md5(test_input($_REQUEST["password"]));
 $address = test_input($_REQUEST["address"]);
 //make a string from checkboxes
-$languages_known = implode(", ", $_REQUEST["languages"]);
-$languages_known = test_input($languages_known);
+// $languages_known = implode(", ", $_REQUEST["languages"]);
 
-$gender =  test_input($_REQUEST["gender"]);
+$gender =  $_REQUEST["gender"];
+
+
 $cmp_id = $_REQUEST["company"];
 $highest_education = test_input($_REQUEST["highest_education"]);
 $role_id = $_REQUEST["role_id"];
 
-session_start();
+
 $flag = 0;
-// validation 
-if (strlen($name) < 2) {
-  $_SESSION['username_error'] = true;
-  $flag = 1;
-}
-
-if (!check_email($email)) { //invalid
-  $_SESSION['email_error'] = true;
-  $flag = 1;
-}
-
-if( !check_phone($phone)){
-  $_SESSION['phone_error'] = true;
-  $flag = 1;
-}
-
-if( !check_password($_REQUEST["password"])){
-  $_SESSION['password_error'] = true;
-  $flag = 1;
-}
-
-if(!$gender) {
-  $_SESSION['gender_error'] = true;
-}
-//if failed start session
-if ($flag == 1) {
-  $_SESSION['error'] = true;
-  header("location:register.php");
-  exit();
-}
 
 //insertion query
 //add company name
@@ -73,20 +80,14 @@ if ($data) {
   $insert = mysqli_query($conn, $sql);
 
   if ($insert) {
-?>
-    <script>
-      alert('Registration successful');
-      window.location.href = "index.php";
-    </script>
-
-  <?php
+    $_SESSION['registered'] = true;
+    header("location:register.php");
   }
 } else {
-  //login failed   
-  ?>
-  <script>
-    alert('Registration Failed');
-    window.location.href = "register.php";
-  </script>
-<?php
+  //register failed  
+  $_SESSION['register_failed'] = true;
+  header("location:register.php");
+  //added
+  exit();
+
 } ?>

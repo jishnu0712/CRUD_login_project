@@ -38,7 +38,7 @@ $highest_education = $result['highest_education'];
         <h1>Update Details</h1>
         <form action="update_action.php?user_id=<?php echo $_REQUEST['user_id'] ?>" method="post">
             <div class="form-group my-4">
-                <label for="username">Username</label>
+                <label for="username">Name</label>
                 <input type="text" id="username" name="username" value="<?php echo $username ?>" class="form-control" placeholder="Enter Username" />
             </div>
 

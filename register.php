@@ -2,6 +2,27 @@
   require "navbar.php";
 
   session_start();
+  if (isset($_SESSION["registered"])) { ?>
+   <div class="alert alert-success" role="alert">
+     Registration successful!
+   </div>
+ <?php
+  }
+
+  if (isset($_SESSION["register_failed"])) { ?>
+    <div class="alert alert-success" role="alert">
+      Email already exists! 
+    </div>
+  <?php
+   }
+ 
+
+  if (isset($_SESSION["error"])) { ?>
+   <div class="alert alert-danger" role="alert">
+    Please check the inputs!
+   </div>
+ <?php
+  }
   //logout user going into registration page
   if (isset($_SESSION['username'])) {
     unset($_SESSION['username']);
@@ -22,11 +43,12 @@
  <body>
    <div class="px-4 py-3">
      <div class="register-box container  shadow px-5 py-4">
+
        <h2>Registration</h2>
 
        <form id="form" action="register_action.php" method="post" enctype="multipart/form-data">
          <div class="form-group my-4">
-           <label for="username">Username <span class="text-danger">*</span></label>
+           <label for="username">Name <span class="text-danger">*</span></label>
            <input type="text" id="username" name="username" class="form-control" autocomplete="off" placeholder="Enter Username" />
          </div>
 
@@ -60,17 +82,9 @@
 
          <div class="form-group my-4">
            <label for="password">Password <span class="text-danger">*</span></label>
-           <input id="password" 
-           type="password" 
-           class="form-control" 
-           name="password"
-          placeholder="at least 4 characters, should include one uppercase, lowercase, number, and special character."
-          hint
-          />
+           <input id="password" type="password" class="form-control" name="password" placeholder="at least 4 characters, should include one uppercase, lowercase, number, and special character." hint />
          </div>
-         <!-- <small class="text-mute"> Password should be at least 4 characters
-           in length and should include at least one upper case letter, one number,
-           and one special character. </small> -->
+
 
          <?php if (isset($_SESSION['password_error'])) {
             if ($_SESSION["password_error"] == true) { ?>
@@ -92,7 +106,7 @@
 
          <!-- gender -->
          <div class="my-4">
-           <h6>Gender:  <span class="text-danger">*</span></h6>
+           <h6>Gender: <span class="text-danger">*</span></h6>
            <input type="radio" name="gender" id="male_checkbox" value="male" />
            <label for="male">Male</label>
 
@@ -108,6 +122,7 @@
              <small class="errorText text-danger"> Please select gender </small>
          <?php }
           } ?>
+
 
          <!-- Languages -->
          <h6>Languages Known</h6>
@@ -174,7 +189,7 @@
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
      <!-- <script src="./register_page_validation.js"></script> -->
      <?php
-      if (isset($_SESSION['error'])) {
+      if (!empty($_SESSION["error"])) {
         unset($_SESSION["error"]);
         unset($_SESSION["username_error"]);
         unset($_SESSION["email_error"]);
@@ -182,7 +197,8 @@
         unset($_SESSION["password_error"]);
         unset($_SESSION["gender_error"]);
       }
-
+      unset($_SESSION["registered"]);
+      unset($_SESSION["register_failed"]);
       ?>
  </body>
 

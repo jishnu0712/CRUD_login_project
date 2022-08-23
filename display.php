@@ -64,7 +64,7 @@ if (!isset($_SESSION['username'])) {
       <thead>
         <tr>
           <th scope='col'></th>
-          <th scope='col'>Username</th>
+          <th scope='col'>Name</th>
           <th scope='col'>Gender</th>
           <th scope='col'>Email</th>
           <th scope='col'>Address</th>
@@ -91,17 +91,18 @@ if (!isset($_SESSION['username'])) {
             <td><?php echo $result['languages_known']; ?></td>
             <td><?php echo $result['cmp_name']; ?></td>
 
+            <?php $id = $result['id']; ?>
             <td>
               <button class="btn btn-link">
-                <a href="form_edit.php?user_id=<?php echo $result['id'] ?>">Edit</a>
+                <a href="form_edit.php?user_id=<?php echo $id; ?>">Edit</a>
               </button>
 
-              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+              <!-- <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
                 Delete
-              </button>
+              </button> -->
 
               <!-- Modal -->
-              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <!-- <div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -115,14 +116,18 @@ if (!isset($_SESSION['username'])) {
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-danger"> <a href="delete_action.php?user_id=<?php echo $result['id'] ?>">Delete</a>
-                      </button>
+                      <a href="delete_action.php?user_id=<?php echo $id; ?>"> <button type="button" class="btn btn-danger">Delete</button></a>
+
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
+
+              <a href="delete_action.php?user_id=<?php echo $id; ?>"> Delete</a>
+
             </td>
           </tr>
+          <!-- while ends -->
         <?php } ?>
       </tbody>
     </table>
