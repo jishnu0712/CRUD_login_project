@@ -55,7 +55,7 @@ if (!isset($_SESSION['username'])) {
   // require "run_query.php";
   $data = mysqli_query($conn, $sql);
   $row = mysqli_num_rows($data); //number of rows
-
+  // echo $row;
   if ($row > 0) {
     // table header
   ?>
@@ -72,6 +72,8 @@ if (!isset($_SESSION['username'])) {
           <th scope='col'>Highest Education</th>
           <th scope='col'>Known Languages</th>
           <th scope='col'>Organization</th>
+          <th scope='col'>ID</th>
+
           <th scope='col'>Action</th>
         </tr>
       </thead>
@@ -79,6 +81,10 @@ if (!isset($_SESSION['username'])) {
 
         <?php
         while ($result = mysqli_fetch_assoc($data)) {
+          // $res = mysqli_fetch_assoc($data);
+          // print_r($res);
+          // exit();
+          // while ($res as $result) {
         ?>
           <tr>
             <td><img src="images/<?php echo $result['picture']; ?>" alt="Avatar" style="border-radius: 50%; width: 60px; height:60px;"></td>
@@ -91,18 +97,23 @@ if (!isset($_SESSION['username'])) {
             <td><?php echo $result['languages_known']; ?></td>
             <td><?php echo $result['cmp_name']; ?></td>
 
+            <td><?php echo $result['id']; ?></td>
+
             <?php $id = $result['id']; ?>
             <td>
               <button class="btn btn-link">
-                <a href="form_edit.php?user_id=<?php echo $id; ?>">Edit</a>
+                <a href="form_edit.php?user_id=<?php echo $id; ?>">
+                  <button type="button" class="btn btn-secondary">Edit</button>
+                </a>
+                <?php echo $id; ?>
               </button>
+              <!-- popup button -->
+              <!-- <button type="button" data-id=< echo $result['id']; ?> onclick="$('#dataid').val($(this).data('id')); " class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"> Delete</button> -->
 
-              <!-- <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                Delete
-              </button> -->
+              <button type="button" data-id=<?php echo 'delete_action.php?user_id=' . $result['id']; ?> onclick="$('#dataid').attr('href',$(this).data('id')); " class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"> Delete</button>
 
               <!-- Modal -->
-              <!-- <div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -112,19 +123,18 @@ if (!isset($_SESSION['username'])) {
                       </button>
                     </div>
                     <div class="modal-body">
+                      <!-- <input type="text" name="dataid" id="dataid" value="" /> -->
                       Are you sure you want to delete?
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <a href="delete_action.php?user_id=<?php echo $id; ?>"> <button type="button" class="btn btn-danger">Delete</button></a>
+                      <!-- <a id="dataid" name="dataid" href="delete_action.php?user_id=<?php echo $id; ?>"> <button type="button" class="btn btn-danger">Delete</button></a> -->
+                      <a id="dataid" name="dataid" href=""> <button type="button" class="btn btn-danger">Delete</button></a>
 
                     </div>
                   </div>
                 </div>
-              </div> -->
-
-              <a href="delete_action.php?user_id=<?php echo $id; ?>"> Delete</a>
-
+              </div>
             </td>
           </tr>
           <!-- while ends -->
@@ -139,6 +149,9 @@ if (!isset($_SESSION['username'])) {
   }
 
   ?>
+
+
+
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

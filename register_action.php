@@ -26,6 +26,10 @@ if (!check_password($_REQUEST["password"])) {
   $_SESSION['password_error'] = true;
   $flag = 1;
 }
+if($_REQUEST["cnf_password"] !== $_REQUEST["password"]) {
+  $_SESSION['cnf_password_error'] = true;
+  $flag = 1;
+}
 
 if (empty($_REQUEST["gender"])) {
   $_SESSION['gender_error'] = true;

@@ -10,16 +10,16 @@
   }
 
   if (isset($_SESSION["register_failed"])) { ?>
-    <div class="alert alert-success" role="alert">
-      Email already exists! 
-    </div>
-  <?php
-   }
- 
+   <div class="alert alert-success" role="alert">
+     Email already exists!
+   </div>
+ <?php
+  }
+
 
   if (isset($_SESSION["error"])) { ?>
    <div class="alert alert-danger" role="alert">
-    Please check the inputs!
+     Please check the inputs!
    </div>
  <?php
   }
@@ -94,6 +94,18 @@
          <?php }
           } ?>
 
+         <!-- confirm password -->
+         <div class="form-group my-4">
+           <label for="cnf_password">Confirm Password <span class="text-danger">*</span></label>
+           <input id="cnf_password" type="password" class="form-control" name="cnf_password" placeholder="Please enter again" hint />
+         </div>
+
+         <?php if (isset($_SESSION['cnf_password_error'])) {
+            if ($_SESSION["cnf_password_error"] == true) { ?>
+             <small class="errorText text-danger"> Passwords do not match!</small>
+         <?php }
+          } ?>
+
          <div class="form-group my-4">
            <label for="picture">Picture</label>
            <input id="picture" type="file" class="form-control" accept="image/*" name="picture" />
@@ -123,7 +135,6 @@
          <?php }
           } ?>
 
-
          <!-- Languages -->
          <h6>Languages Known</h6>
 
@@ -151,6 +162,7 @@
              <option value="<?php echo $result['cmp_id']; ?>"><?php echo $result['cmp_name']; ?></option>
            <?php } ?>
          </select>
+
          <!-- highest education -->
          <div class="my-4">
            <h6>Highest Education: <span class="text-danger">*</span></h6>
@@ -196,6 +208,7 @@
         unset($_SESSION["phone_error"]);
         unset($_SESSION["password_error"]);
         unset($_SESSION["gender_error"]);
+        unset($_SESSION["cnf_password_error"]);
       }
       unset($_SESSION["registered"]);
       unset($_SESSION["register_failed"]);
