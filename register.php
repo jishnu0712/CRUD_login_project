@@ -2,6 +2,8 @@
   require "navbar.php";
 
   session_start();
+  //  print_r($_SESSION['values']['username']);
+
   if (isset($_SESSION["registered"])) { ?>
    <div class="alert alert-success" role="alert">
      Registration successful!
@@ -10,7 +12,7 @@
   }
 
   if (isset($_SESSION["register_failed"])) { ?>
-   <div class="alert alert-success" role="alert">
+   <div class="alert alert-danger" role="alert">
      Email already exists!
    </div>
  <?php
@@ -49,7 +51,7 @@
        <form id="form" action="register_action.php" method="post" enctype="multipart/form-data">
          <div class="form-group my-4">
            <label for="username">Name <span class="text-danger">*</span></label>
-           <input type="text" id="username" name="username" class="form-control" autocomplete="off" placeholder="Enter Username" />
+           <input type="text" id="username" name="username" class="form-control" autocomplete="off" placeholder="Enter Username" value="<?php echo isset($_SESSION['values']) ?  $_SESSION['values']['username'] :  ""?>" />
          </div>
 
          <?php if (isset($_SESSION['username_error'])) {
@@ -60,7 +62,7 @@
 
          <div class="form-group my-4">
            <label for="email">Email <span class="text-danger">*</span></label>
-           <input type="email" id="email" name="email" class="form-control" autocomplete="off" placeholder="Enter Email" />
+           <input type="email" id="email" name="email" class="form-control" autocomplete="off" placeholder="Enter Email"  value="<?php echo isset($_SESSION['values']) ?  $_SESSION['values']['email'] :  ""?>" />
          </div>
 
          <?php if (isset($_SESSION['email_error'])) {
@@ -71,7 +73,7 @@
 
          <div class="form-group my-4">
            <label for="phone">Phone <span class="text-danger">*</span></label>
-           <input type="number" id="phone" name="phone" class="form-control" autocomplete="off" placeholder="Enter Phone" />
+           <input type="number" id="phone" name="phone" class="form-control" autocomplete="off" placeholder="Enter Phone" value="<?php echo isset($_SESSION['values']) ?  $_SESSION['values']['phone'] :  ""?>" />
          </div>
 
          <?php if (isset($_SESSION['phone_error'])) {
@@ -82,7 +84,9 @@
 
          <div class="form-group my-4">
            <label for="password">Password <span class="text-danger">*</span></label>
-           <input id="password" type="password" class="form-control" name="password" placeholder="at least 4 characters, should include one uppercase, lowercase, number, and special character." hint />
+           <input id="password" type="password" class="form-control" name="password"
+           value="<?php echo isset($_SESSION['values']) ?  $_SESSION['values']['password'] :  ""?>"
+           placeholder="at least 4 characters, should include one uppercase, lowercase, number, and special character." hint />
          </div>
 
 
@@ -97,7 +101,9 @@
          <!-- confirm password -->
          <div class="form-group my-4">
            <label for="cnf_password">Confirm Password <span class="text-danger">*</span></label>
-           <input id="cnf_password" type="password" class="form-control" name="cnf_password" placeholder="Please enter again" hint />
+           <input id="cnf_password" type="password" 
+           value="<?php echo isset($_SESSION['values']) ?  $_SESSION['values']['cnf_password'] :  ""?>"
+           class="form-control" name="cnf_password" placeholder="Please enter again" hint />
          </div>
 
          <?php if (isset($_SESSION['cnf_password_error'])) {
@@ -113,7 +119,9 @@
 
          <div class="form-group my-4">
            <label for="address">Address</label>
-           <input type="text" id="address" name="address" class="form-control" autocomplete="off" placeholder="Enter address" />
+           <input type="text" id="address" name="address" 
+           value="<?php echo isset($_SESSION['values']) ?  $_SESSION['values']['address'] :  ""?>"
+           class="form-control" autocomplete="off" placeholder="Enter address" />
          </div>
 
          <!-- gender -->
@@ -209,6 +217,7 @@
         unset($_SESSION["password_error"]);
         unset($_SESSION["gender_error"]);
         unset($_SESSION["cnf_password_error"]);
+        unset($_SESSION["values"]);
       }
       unset($_SESSION["registered"]);
       unset($_SESSION["register_failed"]);

@@ -3,6 +3,7 @@ session_start();
 require 'connection.php';
 require 'validation.php';
 
+
 $flag = 0;
 // validation 
 if (strlen($_REQUEST['username']) < 2) {
@@ -38,6 +39,7 @@ if (empty($_REQUEST["gender"])) {
 //if failed start session
 if ($flag == 1) {
   $_SESSION['error'] = true;
+  $_SESSION['values'] = $_REQUEST;
   header("location:register.php");
   exit();
 }
@@ -94,4 +96,4 @@ if ($data) {
   //added
   exit();
 
-} ?>
+}

@@ -72,8 +72,6 @@ if (!isset($_SESSION['username'])) {
           <th scope='col'>Highest Education</th>
           <th scope='col'>Known Languages</th>
           <th scope='col'>Organization</th>
-          <th scope='col'>ID</th>
-
           <th scope='col'>Action</th>
         </tr>
       </thead>
@@ -97,16 +95,14 @@ if (!isset($_SESSION['username'])) {
             <td><?php echo $result['languages_known']; ?></td>
             <td><?php echo $result['cmp_name']; ?></td>
 
-            <td><?php echo $result['id']; ?></td>
 
             <?php $id = $result['id']; ?>
             <td>
-              <button class="btn btn-link">
-                <a href="form_edit.php?user_id=<?php echo $id; ?>">
-                  <button type="button" class="btn btn-secondary">Edit</button>
+                <a class="btn btn-secondary" href="form_edit.php?user_id=<?php echo $id; ?>">
+                  Edit
                 </a>
-                <?php echo $id; ?>
-              </button>
+                
+             
               <!-- popup button -->
               <!-- <button type="button" data-id=< echo $result['id']; ?> onclick="$('#dataid').val($(this).data('id')); " class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"> Delete</button> -->
 
