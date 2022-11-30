@@ -15,7 +15,7 @@ INSERT INTO `company` (`cmp_id`, `cmp_name`, `cmp_email`, `cmp_phone`, `cmp_addr
 
 //employee table creation
 CREATE TABLE employee (
-    id int PRIMARY KEY,
+    id int PRIMARY KEY AUTO_INCREMENT,
     name varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
     phone varchar(255),

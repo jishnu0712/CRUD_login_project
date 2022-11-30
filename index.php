@@ -8,7 +8,6 @@ if (isset($_SESSION['username'])) {
   session_destroy();
 }
 
-
 $login_err = false;
 $pass_invalid = false;
 $email_invalid = false;
@@ -24,6 +23,7 @@ if (isset($_POST["login"])) {
     $pass = md5($_POST["password"]);
     //valid password
     $query = "SELECT * FROM employee WHERE email='$email' AND password='$pass'";
+    // $query = "SELECT * FROM employee WHERE email='$email' AND password='".$_POST["password"]."'";
 
     require "run_query.php";
     $res = get_number_of_rows($conn, $query);

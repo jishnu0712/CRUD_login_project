@@ -6,43 +6,43 @@ require 'validation.php';
 
 $flag = 0;
 // validation 
-if (strlen($_REQUEST['username']) < 2) {
-  $_SESSION['username_error'] = true;
-  $flag = 1;
-}
+// if (strlen($_REQUEST['username']) < 2) {
+//   $_SESSION['username_error'] = true;
+//   $flag = 1;
+// }
 
-if (!check_email($_REQUEST["email"])) { //invalid
+// if (!check_email($_REQUEST["email"])) { //invalid
 
-  $_SESSION['email_error'] = true;
-  $flag = 1;
-}
+//   $_SESSION['email_error'] = true;
+//   $flag = 1;
+// }
 
-if (!check_phone($_REQUEST["phone"])) {
+// if (!check_phone($_REQUEST["phone"])) {
 
-  $_SESSION['phone_error'] = true;
-  $flag = 1;
-}
+//   $_SESSION['phone_error'] = true;
+//   $flag = 1;
+// }
 
-if (!check_password($_REQUEST["password"])) {
-  $_SESSION['password_error'] = true;
-  $flag = 1;
-}
-if($_REQUEST["cnf_password"] !== $_REQUEST["password"]) {
-  $_SESSION['cnf_password_error'] = true;
-  $flag = 1;
-}
+// if (!check_password($_REQUEST["password"])) {
+//   $_SESSION['password_error'] = true;
+//   $flag = 1;
+// }
+// if($_REQUEST["cnf_password"] !== $_REQUEST["password"]) {
+//   $_SESSION['cnf_password_error'] = true;
+//   $flag = 1;
+// }
 
-if (empty($_REQUEST["gender"])) {
-  $_SESSION['gender_error'] = true;
-  $flag = 1;
-}
-//if failed start session
-if ($flag == 1) {
-  $_SESSION['error'] = true;
-  $_SESSION['values'] = $_REQUEST;
-  header("location:register.php");
-  exit();
-}
+// if (empty($_REQUEST["gender"])) {
+//   $_SESSION['gender_error'] = true;
+//   $flag = 1;
+// }
+// //if failed start session
+// if ($flag == 1) {
+//   $_SESSION['error'] = true;
+//   $_SESSION['values'] = $_REQUEST;
+//   header("location:register.php");
+//   exit();
+// }
 
 //get data from fields
 $name = test_input($_REQUEST['username']); //test input from validation
@@ -58,7 +58,7 @@ $phone = test_input($_REQUEST["phone"]); //test_input from validation.php
 $password = md5(test_input($_REQUEST["password"]));
 $address = test_input($_REQUEST["address"]);
 //make a string from checkboxes
-// $languages_known = implode(", ", $_REQUEST["languages"]);
+$languages_known = implode(", ", $_REQUEST["languages"]);
 
 $gender =  $_REQUEST["gender"];
 
@@ -82,13 +82,13 @@ if ($data) {
   $last_id = mysqli_insert_id($conn);
 
   //query to insert
-  $sql = "INSERT INTO `master` (`id`, `cmp_id`, `emp_id`) VALUES (NULL, '$cmp_id', '$last_id')";
-  $insert = mysqli_query($conn, $sql);
+  // $sql = "INSERT INTO `master` (`id`, `cmp_id`, `emp_id`) VALUES (NULL, '$cmp_id', '$last_id')";
+  // $insert = mysqli_query($conn, $sql);
 
-  if ($insert) {
+  // if ($insert) {
     $_SESSION['registered'] = true;
     header("location:register.php");
-  }
+  // }
 } else {
   //register failed  
   $_SESSION['register_failed'] = true;
