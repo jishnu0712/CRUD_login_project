@@ -39,7 +39,7 @@ if (!isset($_SESSION['username'])) {
   $sql = "";
   //if role_id == 1 => superuser table: query = SELECT *
   if ($role_id == 1) {
-    $sql = "SELECT id,picture, name, gender, email, employee.address, employee.phone, highest_education, languages_known, company.cmp_name FROM employee LEFT JOIN company ON employee.cmp_id = company.cmp_id;";
+    $sql = "SELECT id, picture, name, gender, email, employee.address, employee.phone, highest_education, languages_known, company.cmp_name FROM employee LEFT JOIN company ON employee.cmp_id = company.cmp_id;";
   }
 
   //if role_id == 2 => get users with same company name, table: q = SELECT * WHERE company = 

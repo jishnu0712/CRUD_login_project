@@ -3,12 +3,17 @@
    $servername = "localhost";
    $username = "root";
    $password = "";
-   $database = "testcreate";
+   $database = "employee_mgmt";
    
     //connect DBMS
-    $conn = mysqli_connect($servername, $username, $password, $database);
+    try{
+        $conn = mysqli_connect($servername, $username, $password, $database);
+        if(!$conn){
+            throw new Exception(mysqli_connect_error());
+        }
+    }
     //check connection
-    if(!$conn) {
-        die("failed to connect :" . mysqli_connect_error());
+    catch(Exception $e){
+        die("failed to connect :" . $e);
     }
 ?>

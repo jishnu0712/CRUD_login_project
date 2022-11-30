@@ -1,0 +1,39 @@
+$sql = "INSERT INTO `employee` (`name`, `email`, `phone`, `password`, `picture`, `address`, `gender`, `languages_known`, `highest_education`, `role_id`, `cmp_id`) VALUES ('$name','$email','$phone','$password','$filename','$address','$gender','$languages_known','$highest_education', '$role_id','$cmp_id')";
+
+
+//company table
+CREATE TABLE company (
+    cmp_id int PRIMARY KEY,
+    cmp_name varchar(255) NOT NULL,
+    cmp_email varchar(255) NOT NULL,
+    cmp_phone varchar(255),
+    cmp_address varchar(255)
+);
+
+//INSERT query
+INSERT INTO `company` (`cmp_id`, `cmp_name`, `cmp_email`, `cmp_phone`, `cmp_address`) VALUES ('', 'Mantra labs', 'abcd@mglobal.com', '1234567890', 'Bangalore'), ('1', 'Dell', 'dell@gmail.com', '1234567890', 'USA');
+
+//employee table creation
+CREATE TABLE employee (
+    id int PRIMARY KEY,
+    name varchar(255) NOT NULL,
+    email varchar(255) NOT NULL,
+    phone varchar(255),
+    password varchar(255) NOT NULL,
+    picture varchar(255),
+    address varchar(255),
+    gender varchar(10),
+    languages_known varchar(255),
+    highest_education varchar(255),
+    role_id varchar(255) NOT NULL,
+    cmp_id int,
+    CONSTRAINT FK_cmpId FOREIGN KEY (cmp_id)
+    REFERENCES company(cmp_id)
+);
+
+//INSERT query
+INSERT INTO `employee` (`id`, `name`, `email`, `phone`, `password`, `picture`, `address`, `gender`, `languages_known`, `highest_education`, `role_id`, `cmp_id`) VALUES ('', 'Jishnu Dev Roy', 'jdr@mglobal.com', '1234567890', 'abcd', 'jpg', 'malda', 'male', 'bengali', 'Masters', '1', '0');
+
+//drop table
+DROP table employee;
+
