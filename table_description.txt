@@ -25,7 +25,7 @@ CREATE TABLE employee (
     gender varchar(10),
     languages_known varchar(255),
     highest_education varchar(255),
-    role_id varchar(255) NOT NULL,
+    role_id varchar(255) NOT NULL ,
     cmp_id int,
     CONSTRAINT FK_cmpId FOREIGN KEY (cmp_id)
     REFERENCES company(cmp_id)
