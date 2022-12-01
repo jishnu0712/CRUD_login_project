@@ -1,0 +1,5 @@
+1. separate user profile page
+2. remove user from list
+3. bulk employee list upload
+4. bulk details download
+5. generate employee details PDF
