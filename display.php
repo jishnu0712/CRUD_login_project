@@ -33,6 +33,10 @@ if (!isset($_SESSION['username'])) {
   $sql_get_role = "SELECT * FROM `employee` WHERE `email` LIKE '$email'";
   $data = mysqli_query($conn, $sql_get_role);
   $result = mysqli_fetch_assoc($data);
+  if( !isset($result) && empty($result) ) {
+    echo "entry not found";
+    die;
+  }
 
   $role_id = $result['role_id'];
   $cmp_id = $result['cmp_id'];

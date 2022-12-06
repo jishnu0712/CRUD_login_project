@@ -1,6 +1,9 @@
 <?php 
     require "connection.php";
-
+    if(!isset($_REQUEST) && empty($_REQUEST)){
+        echo "Value unavaliable";
+        die;
+    }
     $id = $_REQUEST['user_id'];
     $username =  $_REQUEST['username'];
     $email =  $_REQUEST['email'];

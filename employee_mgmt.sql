@@ -52,7 +52,7 @@ CREATE TABLE `employee` (
   `gender` varchar(10) DEFAULT NULL,
   `languages_known` varchar(255) DEFAULT NULL,
   `highest_education` varchar(255) DEFAULT NULL,
-  `role_id` varchar(255) NOT NULL COMMENT '1=super admin, 2 = company admin,\r\n3 = employee',
+  `role_id` varchar(255) NOT NULL COMMENT '1=superadmin, 2=company admin,\r\n3 = employee',
   `cmp_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
